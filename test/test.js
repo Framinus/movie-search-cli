@@ -1,1 +1,3 @@
-const expect = require()
+const expect = require('chai').expect;
+
+describe('')

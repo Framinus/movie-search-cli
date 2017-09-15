@@ -34,5 +34,3 @@ const parseData = function (data) {
     console.log(titles[i]);
   }
 };
-
-searchIMDB();
