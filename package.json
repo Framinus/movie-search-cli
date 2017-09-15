@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "echo_test": "echo 'hello'"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,8 @@
   "author": "James McCormack",
   "license": "ISC",
   "devDependencies": {
-    "chai": "^4.1.2"
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2"
