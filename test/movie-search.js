@@ -12,12 +12,6 @@ describe('searchIMDB', function () {
       done();
     });
   });
-  // it('should return the proper data when passed "thelionking"', function (done, html) {
-  //   expect(html).to.equal([ ' The Lion King (1994) ',
-  //   ' The Lion King (2019) ',
-  //   ' The Last Pinoy Action King (2015) ',
-  //   ' The Making of the Lion (2013) ' ])
-  // });
 });
 
 describe('parseData', function () {
@@ -25,4 +19,17 @@ describe('parseData', function () {
     expect(parseData).to.be.a('function');
     done();
   });
+  it('should return an array', function () {
+    searchIMDB("thelionking", function (done, html) {
+      expect(parseData()).to.be.an('array');
+    });
+  });
+  it('should return the IMDB data for "The Lion King" when passed that search term', function () {
+    searchIMDB("thelionking", function (done, html) {
+      expect(parseData(html)).to.equal([' The Lion King (1994) ',
+  ' The Lion King (2019) ',
+  ' The Last Pinoy Action King (2015) ',
+  ' The Making of the Lion (2013) '])
+  });
+});
 });
