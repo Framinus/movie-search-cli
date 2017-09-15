@@ -1,17 +1,13 @@
+#!/usr/bin/env node
+
 const http = require('http');
 const cheerio = require('cheerio');
 
-// const searchTerm = process.argv[2];
-
-// const url = `http://www.imdb.com/find?ref_=nv_sr_fn&q=${searchTerm}&s=all`;
-
-// searches are in <td class='result_text'>
-// <td class="result_text"> <a href="/title/tt0401422/?ref_=fn_al_tt_2">Finding Nemo</a> (2003) (Video Game) </td>
 const searchIMDB = function () {
   const searchTerm = process.argv[2];
   http.get({
     host: 'www.imdb.com',
-    path: `/find?ref_=nv_sr_fn&q=${searchTerm}&s=all`,
+    path: `http://www.imdb.com/find?q=${searchTerm}&s=tt&ttype=ft&ref_=fn_ft`,
   }, (response) => {
     let html = '';
     response.on('data', (chunk) => {
@@ -21,7 +17,7 @@ const searchIMDB = function () {
       parseData(html);
     });
     response.on("error", (error) => {
-      console.log(error);
+      console.log("Error reading page data");
     });
   });
 };
@@ -34,7 +30,9 @@ const parseData = function (data) {
     .find('.result_text')
     .map((i, el) => $(el).text())
     .toArray();
-  console.log(titles);
+  for (let i = 0; i < titles.length; i += 1) {
+    console.log(titles[i]);
+  }
 };
 
 searchIMDB();
