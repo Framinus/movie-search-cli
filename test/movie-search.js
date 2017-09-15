@@ -1,5 +1,4 @@
 const expect = require('chai').expect;
-const http = require('http');
 const { searchIMDB, parseData } = require('../movie-search.js');
 
 describe('searchIMDB', function () {
@@ -7,20 +6,18 @@ describe('searchIMDB', function () {
     expect(searchIMDB).to.be.a('function');
     done();
   });
-  // it('should return data if get request is successful', function (done) {
-  //   let html = '';
-  //   http.get({
-  //     host: 'www.imdb.com',
-  //     path: `http://www.imdb.com/find?q=findingnemo&s=tt&ttype=ft&ref_=fn_ft`,
-  //   }, (response) => {
-  //     response.on('data', (chunk) => {
-  //       html += chunk;
-  //     });
-  //     return html;
-  //   });
-  //   done();
+  it('should return an html string', function () {
+    searchIMDB("findingnemo", function (done, html) {
+      expect(typeof html).to.be.a('string');
+      done();
+    });
+  });
+  // it('should return the proper data when passed "thelionking"', function (done, html) {
+  //   expect(html).to.equal([ ' The Lion King (1994) ',
+  //   ' The Lion King (2019) ',
+  //   ' The Last Pinoy Action King (2015) ',
+  //   ' The Making of the Lion (2013) ' ])
   // });
-  // expect().to.equal('');
 });
 
 describe('parseData', function () {
@@ -28,12 +25,4 @@ describe('parseData', function () {
     expect(parseData).to.be.a('function');
     done();
   });
-  // it('should return titleArray', function (done) {
-  //   searchIMDB("thelionking");
-  //   expect(parseData()).to.equal([ ' The Lion King (1994) ',
-  //     ' The Lion King (2019) ',
-  //     ' The Last Pinoy Action King (2015) ',
-  //     ' The Making of the Lion (2013) ' ]);
-  //     done();
-  // });
 });

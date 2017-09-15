@@ -19,10 +19,11 @@ const parseData = function (data) {
     // this is actually what prints results.
     console.log(titles[i]);
   }
+  console.log(titleArray);
   return titleArray;
 };
 
-const searchIMDB = function (search) {
+const searchIMDB = function (search, callback) {
   let html;
   http.get({
     host: 'www.imdb.com',
@@ -34,14 +35,15 @@ const searchIMDB = function (search) {
     });
     response.on("end", () => {
       parseData(html);
+      callback(html);
     });
     response.on("error", (error) => {
       console.log("Error reading page data");
     });
   });
-  return html;
 };
-
-searchIMDB(searchTerm);
+if (!module.parent) {
+  searchIMDB(searchTerm);
+}
 
 module.exports = { searchIMDB, parseData };
