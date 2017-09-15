@@ -3,8 +3,26 @@
 const http = require('http');
 const cheerio = require('cheerio');
 
+const searchTerm = process.argv[2];
+
+const parseData = function (data) {
+  const $ = cheerio.load(data);
+  const titleArray = [];
+  const titles = $('.findList')
+    .first()
+    .find('.result_text')
+    .map((i, el) => $(el).text())
+    .toArray();
+  for (let i = 0; i < titles.length; i += 1) {
+    // added so there is value returned to test.
+    titleArray.push(titles[i]);
+    // this is actually what prints results.
+    console.log(titles[i]);
+  }
+  return titleArray;
+};
+
 const searchIMDB = function () {
-  const searchTerm = process.argv[2];
   http.get({
     host: 'www.imdb.com',
     path: `http://www.imdb.com/find?q=${searchTerm}&s=tt&ttype=ft&ref_=fn_ft`,
@@ -23,14 +41,5 @@ const searchIMDB = function () {
 };
 
 
-const parseData = function (data) {
-  const $ = cheerio.load(data);
-  const titles = $('.findList')
-    .first()
-    .find('.result_text')
-    .map((i, el) => $(el).text())
-    .toArray();
-  for (let i = 0; i < titles.length; i += 1) {
-    console.log(titles[i]);
-  }
-};
+
+searchIMDB(searchTerm);
