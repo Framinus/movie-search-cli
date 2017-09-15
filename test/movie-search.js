@@ -25,8 +25,12 @@ describe('parseData', function () {
   it('should be a function', function () {
     expect(parseData).to.be.a('function');
   });
+  // this test currently throws a callback error before running.
   it('returns the correct data', function () {
-    // searchIMDB()
-    // expect(parseData())
+    searchIMDB("thelionking");
+    expect(parseData(data)).to.equal([ ' The Lion King (1994) ',
+  ' The Lion King (2019) ',
+  ' The Last Pinoy Action King (2015) ',
+  ' The Making of the Lion (2013) ' ]);
   });
 });

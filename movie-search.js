@@ -19,13 +19,14 @@ const parseData = function (data) {
     // this is actually what prints results.
     console.log(titles[i]);
   }
+  console.log(titleArray);
   return titleArray;
 };
 
-const searchIMDB = function () {
+const searchIMDB = function (search) {
   http.get({
     host: 'www.imdb.com',
-    path: `http://www.imdb.com/find?q=${searchTerm}&s=tt&ttype=ft&ref_=fn_ft`,
+    path: `http://www.imdb.com/find?q=${search}&s=tt&ttype=ft&ref_=fn_ft`,
   }, (response) => {
     let html = '';
     response.on('data', (chunk) => {
@@ -39,7 +40,5 @@ const searchIMDB = function () {
     });
   });
 };
-
-
 
 searchIMDB(searchTerm);
