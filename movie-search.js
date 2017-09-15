@@ -19,16 +19,16 @@ const parseData = function (data) {
     // this is actually what prints results.
     console.log(titles[i]);
   }
-  console.log(titleArray);
   return titleArray;
 };
 
 const searchIMDB = function (search) {
+  let html;
   http.get({
     host: 'www.imdb.com',
     path: `http://www.imdb.com/find?q=${search}&s=tt&ttype=ft&ref_=fn_ft`,
   }, (response) => {
-    let html = '';
+    html = '';
     response.on('data', (chunk) => {
       html += chunk;
     });
@@ -39,6 +39,9 @@ const searchIMDB = function (search) {
       console.log("Error reading page data");
     });
   });
+  return html;
 };
 
 searchIMDB(searchTerm);
+
+module.exports = { searchIMDB, parseData };
