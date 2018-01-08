@@ -19,7 +19,6 @@ const parseData = function (data) {
     // this is actually what prints results.
     console.log(titles[i]);
   }
-  console.log(titleArray);
   return titleArray;
 };
 
@@ -35,7 +34,7 @@ const searchIMDB = function (search, callback) {
     });
     response.on("end", () => {
       parseData(html);
-      callback(html);
+      // callback(html);
     });
     response.on("error", (error) => {
       console.log("Error reading page data");
